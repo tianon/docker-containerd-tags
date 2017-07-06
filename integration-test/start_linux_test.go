@@ -324,7 +324,7 @@ func (cs *ContainerdSuite) TestOOM(t *check.C) {
 	bundleName := "busybox-sh-512k-memlimit"
 	if err := CreateBundleWithFilter("busybox", bundleName, []string{"sh", "-c", "x=oom-party-time; while true; do x=$x$x$x$x$x$x$x$x$x$x; done"}, func(spec *ocs.Spec) {
 		// Limit to 512k for quick oom
-		var limit uint64 = 8 * 1024 * 1024
+		var limit int64 = 8 * 1024 * 1024
 		spec.Linux.Resources.Memory = &ocs.LinuxMemory{
 			Limit: &limit,
 		}
